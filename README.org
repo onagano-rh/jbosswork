@@ -19,3 +19,8 @@ The same as attachment "hotrodwrapper.zip" in [[https://bugzilla.redhat.com/show
 * jdbcwebservlet
 
 A sample JDBC servlet in a web application.
+
+
+* restcache
+
+A sample JDG library mode application to be deployed on EAP.

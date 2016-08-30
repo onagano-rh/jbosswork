@@ -1,0 +1,28 @@
+﻿<infinispan xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:infinispan:config:6.0 http://www.infinispan.org/schemas/infinispan-config-6.2.xsd"
+	xmlns="urn:infinispan:config:6.2">
+
+	<global>
+		<globalJmxStatistics enabled="true" allowDuplicateDomains="true" cacheManagerName="jdg-manager"/>
+		<transport>
+			<properties>
+				<property name="configurationFile" value="jgroups-tcp.xml"/>
+			</properties>
+		</transport>
+		<asyncTransportExecutor>
+			<properties>
+				<property name="queueSize" value="0"/>
+				<property name="maxThreads" value="3000"/>
+			</properties>
+		</asyncTransportExecutor>
+	</global>
+
+	<namedCache name="DUMMY">
+		<jmxStatistics enabled="true"/>
+		<clustering mode="repl">
+			<sync replTimeout="1800000"/>
+			<stateTransfer fetchInMemoryState="true" chunkSize="10000" timeout="1800000" awaitInitialTransfer="false"/>
+		</clustering>
+	</namedCache>
+
+</infinispan>
