@@ -1,0 +1,15 @@
+connect 127.0.0.1
+put key01 kdjafkl
+put key02 sklfjalsd
+put key03 lsdkf
+put key04 lsfjksld
+put key05 slfjskdjfls
+put key06 sldkjfsk
+put key07 sldkjfsldkfj
+put key08 slklksjdkf
+put key09 lskdjfks
+put key10 lskdsdkljfslk
+put key11 sldkjfskldjf
+put key12 slkdfj
+disconnect
+
