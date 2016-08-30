@@ -1,0 +1,21 @@
+#+TITLE: JBossWork: Java projects for JBoss support cases
+
+* distributablewar
+
+A sample clustering web application.
+
+
+* hotrodclient
+
+A sample Java Hot Rod client for JDG server.
+
+
+* hotrodwrapper
+
+A sample C++ Hot Rod client using OpenResty (Nginx and LuaJIT) for JDG server.
+The same as attachment "hotrodwrapper.zip" in [[https://bugzilla.redhat.com/show_bug.cgi?id%3D1228026][BZ-1228026]].
+
+
+* jdbcwebservlet
+
+A sample JDBC servlet in a web application.
