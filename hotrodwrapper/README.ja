@@ -1,0 +1,84 @@
+* 各ファイルの説明
+
+|-- hotrod.lua          # Nginxから呼ばれるLuaコード
+|-- hotrodwrapper.cpp   # Luaから呼ばれるネイティブライブラリのコード
+|-- Makefile            # ビルド方法や、Nginxの起動方法などを定義
+|-- nginx
+|   |-- conf
+|   |   `-- nginx.conf  # Nginxの設定ファイル
+|   |-- logs
+|   |   |-- access.log  # Nginxのアクセスログ
+|   |   `-- error.log   # Nginxのエラーログ（Lua関数ngx.log()の出力先）
+|-- siege.log           # Siegeの実行結果の統計
+|-- test.lua            # Lua単独でのネイティブライブラリのテスト用
+`-- urls.txt            # SiegeでアクセスするURLのリスト
+
+
+
+* OpenResty のインストール
+
+ホームページ [1] からたどれる Installation のページの説明の通りにビルドします。
+Cプログラムをビルドできる状態で、下記のように追加のパッケージインストールが必要です。
+
+  $ yum install readline-devel pcre-devel openssl-devel
+
+あとは通常の手順でビルドできます。--prefixには通常ユーザーのディレクトリを指定可能
+で、ここで指定したものがMakefileでの OPENRESTY_HOME になります。
+
+  $ ./configure --prefix=/path/to/openresty_home
+  $ make
+  $ make install
+
+
+
+* Makefile 内のパスの書き換え
+
+冒頭の二つのマクロを環境に合わせて書き換えます。OPENRESTY_HOME がこれをビルドした
+時の--prefixの値、HOTROD_DIST がCPよりダウンロードしたHot Rod C++クライアント
+のアーカイブを解凍したものです。
+
+  OPENRESTY_HOME = /home/onagano/work/openresty/build
+  HOTROD_DIST = /home/onagano/cases/01454323/jboss-datagrid-6.4.0-remote-cpp-client-RHEL6-x86_64
+
+OpenRestyを使わず、個別にNginxとLuaJITを用意した場合は、以下のマクロを書き換えます。
+
+  NGINX_HOME = $(OPENRESTY_HOME)/nginx
+  LUAJIT_HOME = $(OPENRESTY_HOME)/luajit
+
+これらはいずれもインクルードファイル (*.h) やライブラリファイル (lib*.so) のパスを表す
+ためのものです。デバッグ版のlibhotrod.soを使う場合は HOTROD_LIB を書き換えてください。
+
+
+
+* 開発の概要
+
+作業は全てこのファイルのあるディレクトリで行えます。
+JDGサーバーとNginxを起動しておきます。JDGサーバーはデフォルトのスタンドアローンでも
+構いません。
+
+$ $JDG_HOME/bin/standalone.sh &
+$ make start
+
+ソースファイルを編集し、ビルドします。関数start()内でConfigurationBuilderを初期化
+しています。
+
+$ vi hotrodwrapper.cpp
+$ make lib
+
+テストの前にNginxをリロードし、新しいhotrodwrapper.soを読み込ませます。hotrod.lua
+やnginx.confを編集した場合もリロードが必要です。
+
+$ make reload
+$ curl http://localhost:8000/hotrod/default/hogekey/hogevalue # putの場合
+$ curl http://localhost:8000/hotrod/default/hogekey           # getの場合
+$ tail nginx/logs/error.log                                   # エラーの確認
+
+Siege [2] をEPELよりインストールし、予めファイル urls.txt にリストしたURLで負荷を
+かけることも可能です。
+
+$ make siege
+
+
+
+[1] http://openresty.org/
+[2] https://www.joedog.org/siege-home/

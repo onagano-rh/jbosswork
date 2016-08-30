@@ -1,0 +1,4 @@
+http://127.0.0.1:8000/hotrod/default/hoge/hogevalue
+http://127.0.0.1:8000/hotrod/default/hoge
+http://127.0.0.1:8000/hotrod/default/foo/foovalue
+http://127.0.0.1:8000/hotrod/default/foo

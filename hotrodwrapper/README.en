@@ -1,0 +1,86 @@
+* File list
+
+|-- hotrod.lua          # Lua code called from Nginx
+|-- hotrodwrapper.cpp   # Native library code called from Lua
+|-- Makefile            # How to build, how to start Nginx, etc.
+|-- nginx
+|   |-- conf
+|   |   `-- nginx.conf  # Configuration of Nginx
+|   |-- logs
+|   |   |-- access.log  # Access log of Nginx
+|   |   `-- error.log   # Error log of Nginx, the output of Lua function "ngx.log()"
+|-- siege.log           # Statistics log of Siege
+|-- test.lua            # Just of a test of the native library
+`-- urls.txt            # URL list for Siege
+
+
+
+* How to install OpenResty, a bundle of Nginx/LuaJIT/Lua-module
+
+Download the source code from the homepage [1] and follow the instruction
+of page "Installation".  You'll need C development tools and the following
+packages as well.
+
+  $ yum install readline-devel pcre-devel openssl-devel
+
+The rest is normal.  You can use any directory as --prefix.  It will be
+OPENRESTY_HOME in the Makefile.
+
+  $ ./configure --prefix=/path/to/openresty_home
+  $ make
+  $ make install
+
+
+
+* Rewriting paths in Makefile
+
+Adjust the first 2 macros in the Makefile.
+OPENRESTY_HOME indicates the --prefix of your installation.
+HOTROD_DIST indicates the C++ library distribution from the Customer Portal.
+
+  OPENRESTY_HOME = /home/onagano/work/openresty/build
+  HOTROD_DIST = /home/onagano/cases/01454323/jboss-datagrid-6.4.0-remote-cpp-client-RHEL6-x86_64
+
+You can use your own Nginx and LuaJIT, instead of OpenResty.  In this case,
+adjust the following 2 macros as well.
+
+  NGINX_HOME = $(OPENRESTY_HOME)/nginx
+  LUAJIT_HOME = $(OPENRESTY_HOME)/luajit
+
+Those are used to indicate include files (*.h) and library files (lib*.so).
+To use a debug version of libhotrod.so, adjust HOTROD_LIB.
+
+
+
+* How to develop
+
+All work can be done in this directory.
+Start a JDG server.  The out-of-the-box standalone instance is enough.
+Then start Nginx as well.
+
+$ $JDG_HOME/bin/standalone.sh &
+$ make start
+
+Edit the source file, especially ConfigurationBuilder in function start().
+
+$ vi hotrodwrapper.cpp
+$ make lib
+
+Reload Nginx to reflect the change.  This is required when you edit hotrod.lua
+and nginx.conf as well.
+Call the client by curl command as follows.
+
+$ make reload
+$ curl http://localhost:8000/hotrod/default/hogekey/hogevalue # put operation
+$ curl http://localhost:8000/hotrod/default/hogekey           # get operation
+$ tail nginx/logs/error.log                                   # check errror.log
+
+You can use Siege [2] as well.  Install it from EPEL repository and list
+URLs in urls.txt.
+
+$ make siege
+
+
+
+[1] http://openresty.org/
+[2] https://www.joedog.org/siege-home/
