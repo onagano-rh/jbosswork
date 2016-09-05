@@ -6,13 +6,14 @@ import org.infinispan.client.hotrod.*;
 import org.infinispan.client.hotrod.configuration.*;
 
 import java.util.Map;
-import org.infinispan.commons.util.concurrent.NotifyingFuture;
 
 public class HotRodClient {
     private static Logger LOG = Logger.getLogger(HotRodClient.class.getName());
 
     private RemoteCacheManager cacheManager;
     private RemoteCache<String, Object> cache;
+    
+    private EventLogListener listener = new EventLogListener();
 
     public HotRodClient(String serverList, String cacheName) {
         connect(serverList);
@@ -92,5 +93,15 @@ public class HotRodClient {
         catch (Exception e) {
             LOG.log(Level.FINE, "Error in clearAsync", e);
         }
+    }
+    
+    public void addListener() {
+        cache.addClientListener(listener);
+        LOG.info("Added " + listener);
+    }
+
+    public void removeListener() {
+        cache.removeClientListener(listener);
+        LOG.info("Removed " + listener);
     }
 }

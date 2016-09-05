@@ -1,2 +1,5 @@
 hotrodclient.log*
 target/
+.classpath
+.project
+.settings/

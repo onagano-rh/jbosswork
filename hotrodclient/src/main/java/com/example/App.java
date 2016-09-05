@@ -84,6 +84,14 @@ public class App {
                         program.clearAsync();
                         break;
 
+                    case "addListener":
+                        program.addListener();
+                        break;
+
+                    case "removeListener":
+                        program.removeListener();
+                        break;
+
                     default:
                         break;
                     }
