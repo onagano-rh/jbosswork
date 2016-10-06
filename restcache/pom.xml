@@ -11,7 +11,23 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
     <version.jboss.spec.javaee.6.0>3.0.2.Final-redhat-15</version.jboss.spec.javaee.6.0>
-    <version.org.infinispan>6.4.0.Final-redhat-4</version.org.infinispan>
+<!--
+        6.4.0
+        <version>6.2.0.Final-redhat-4</version>
+        6.4.1
+        <version>6.2.1.Final-redhat-2</version>
+        6.5.0
+        <version>6.3.0.Final-redhat-5</version>
+        6.5.1
+        <version>6.3.1.Final-redhat-1</version>
+        6.6.0
+        <version>6.4.0.Final-redhat-4</version>
+        6.6.1
+        <version>6.4.1.Final-redhat-1</version>
+        7.0.0
+        <version>8.3.0.Final-redhat-1</version>
+-->
+    <version.org.infinispan>6.4.1.Final-redhat-1</version.org.infinispan>
     <version.war.plugin>2.1.1</version.war.plugin>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
