@@ -11,9 +11,9 @@ import org.infinispan.Cache;
 import org.jboss.logging.Logger;
 
 /**
- * Usage:
- *   curl "http://localhost:8080/restcache/rest/cachename/put/key01/aaa"
- *   curl "http://localhost:8080/restcache/rest/cachename/get/key01"
+ * Examples:
+ *   curl "http://localhost:8080/restcache/rest/DUMMY/put/key01/aaa"
+ *   curl "http://localhost:8080/restcache/rest/DUMMY/get/key01"
  */
 
 @SuppressWarnings({"rawtypes", "unchecked"})
