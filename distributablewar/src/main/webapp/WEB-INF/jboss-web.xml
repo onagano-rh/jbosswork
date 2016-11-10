@@ -17,4 +17,8 @@
 -->
   </replication-config>
 
+   <!-- Configure usage of the security domain "other" -->
+   <security-domain>other</security-domain>
+   <disable-audit>true</disable-audit>
+
 </jboss-web>
