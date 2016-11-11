@@ -10,6 +10,7 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
+    <version.jboss.maven.plugin>7.1.1.Final</version.jboss.maven.plugin>
   </properties>
   <dependencies>
     <dependency>
@@ -26,6 +27,13 @@
   </dependencies>
   <build>
     <finalName>distributablewar</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.jboss.as.plugins</groupId>
+        <artifactId>jboss-as-maven-plugin</artifactId>
+        <version>${version.jboss.maven.plugin}</version>
+      </plugin>
+    </plugins>
   </build>
   <dependencyManagement>
    <dependencies>
