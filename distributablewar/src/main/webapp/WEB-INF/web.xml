@@ -14,21 +14,24 @@
   </filter>
 
   <context-param>
-  	<param-name>sleep-seconds-initializing</param-name>
-  	<param-value>1</param-value>
+    <param-name>sleep-seconds-initializing</param-name>
+    <param-value>1</param-value>
   </context-param>
   <context-param>
-  	<param-name>sleep-seconds-destroying</param-name>
+    <param-name>sleep-seconds-destroying</param-name>
     <param-value>1</param-value>
   </context-param>
 
-   <!-- Configure login to be HTTP Basic
-   <login-config>
-      <auth-method>BASIC</auth-method>
-      <realm-name>RealmUsersRoles</realm-name>
-   </login-config>
+  <!-- Configure login to be HTTP Basic
+       http://svn.apache.org/repos/asf/tomcat/tc7.0.x/trunk/webapps/examples/jsp/security/protected/
+  <login-config>
+    <auth-method>BASIC</auth-method>
+    <realm-name>RealmUsersRoles</realm-name>
+  </login-config>
+  -->
 
-https://github.com/jboss-developer/jboss-eap-quickstarts/tree/6.4.x/servlet-security
+  <!--
+      https://github.com/jboss-developer/jboss-eap-quickstarts/tree/6.4.x/servlet-security
 
 User Name: quickstartUser
 Password: quickstartPwd1!
@@ -37,39 +40,42 @@ Role: quickstarts
 User Name: guest
 Password: guestPwd1!
 Role: notauthorized
-   -->
 
-   <security-constraint>
-      <display-name>Example Security Constraint</display-name>
-      <web-resource-collection>
-         <web-resource-name>Protected Area</web-resource-name>
-         <!-- Define the context-relative URL(s) to be protected -->
-         <url-pattern>/protected/*</url-pattern>
-         <!-- If you list http methods, only those methods are protected -->
-         <http-method>DELETE</http-method>
-         <http-method>GET</http-method>
-         <http-method>POST</http-method>
-         <http-method>PUT</http-method>
-      </web-resource-collection>
-      <auth-constraint>
-         <!-- Anyone with one of the listed roles may access this area -->
-         <role-name>quickstarts</role-name>
-      </auth-constraint>
-    </security-constraint>
+application-users.properties:
+quickstartUser=c2d60ae3c894489fa59196c192e351ca
+guest=85697d05cf9d5bd67fa969d29a966960
 
-    <!-- Default login configuration uses form-based authentication -->
-    <login-config>
-      <auth-method>FORM</auth-method>
-      <realm-name>Example Form-Based Authentication Area</realm-name>
-      <form-login-config>
-        <form-login-page>/protected/login.jsp</form-login-page>
-        <form-error-page>/protected/error.jsp</form-error-page>
-      </form-login-config>
-    </login-config>
+application-roles.properties:
+quickstartUser=quickstarts
+guest=notauthorized
+  -->
 
-    <!-- Security roles referenced by this web application -->
-    <security-role>
+  <security-constraint>
+    <display-name>Example Security Constraint</display-name>
+    <web-resource-collection>
+      <web-resource-name>Protected Area</web-resource-name>
+      <url-pattern>/protected/*</url-pattern>
+      <http-method>DELETE</http-method>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+      <http-method>PUT</http-method>
+    </web-resource-collection>
+    <auth-constraint>
       <role-name>quickstarts</role-name>
-    </security-role>
+    </auth-constraint>
+  </security-constraint>
+
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>Example Form-Based Authentication Area</realm-name>
+    <form-login-config>
+      <form-login-page>/protected/login.jsp</form-login-page>
+      <form-error-page>/protected/error.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+
+  <security-role>
+    <role-name>quickstarts</role-name>
+  </security-role>
 
 </web-app>

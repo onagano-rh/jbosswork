@@ -10,7 +10,7 @@
   <properties>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
-    <version.jboss.maven.plugin>7.1.1.Final</version.jboss.maven.plugin>
+    <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
   </properties>
   <dependencies>
     <dependency>
