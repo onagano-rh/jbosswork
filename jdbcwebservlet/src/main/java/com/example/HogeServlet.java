@@ -32,7 +32,8 @@ public class HogeServlet extends HttpServlet {
     @Resource(lookup="java:jboss/datasources/ExampleDS")
     private DataSource dataSource;
     
-    private int size = 50;
+    private int size = 1;
+    private long sleep = 100;
 
     @PostConstruct
     private void createTable() throws Exception {
@@ -49,6 +50,9 @@ public class HogeServlet extends HttpServlet {
         pw.println("Hello!!Welcome to the first servlet");
         try {
         	size = Integer.parseInt(request.getParameter("size"));
+        } catch (NumberFormatException ignore) {}
+        try {
+        	sleep = Long.parseLong(request.getParameter("sleep"));
         } catch (NumberFormatException ignore) {}
 
         try {
@@ -69,6 +73,11 @@ public class HogeServlet extends HttpServlet {
                         pst.setInt(j, 123);
                     }
                     ResultSet rs = pst.executeQuery();
+
+                    try {
+                        Thread.sleep(sleep);
+                    } catch (InterruptedException e) {}
+
                     rs.close();       
                     logger.log(Level.INFO, "Prepared statement {0} executed.", i);
                 }
