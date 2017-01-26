@@ -76,6 +76,10 @@ public class App {
                         write(program.size());
                         break;
 
+                    case "keySetSize":
+                        write(program.keySetSize());
+                        break;
+
                     case "clear":
                         program.clear();
                         break;

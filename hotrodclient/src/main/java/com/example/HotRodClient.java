@@ -82,6 +82,10 @@ public class HotRodClient {
         return cache.size();
     }
 
+    public int keySetSize() {
+        return cache.keySet().size();
+    }
+
     public void clear() {
         cache.clear();
     }
