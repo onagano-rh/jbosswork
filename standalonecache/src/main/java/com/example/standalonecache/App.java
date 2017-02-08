@@ -1,5 +1,7 @@
 package com.example.standalonecache;
 
+import java.io.IOException;
+
 import org.infinispan.Cache;
 import org.infinispan.configuration.cache.CacheMode;
 import org.infinispan.configuration.cache.Configuration;
@@ -13,11 +15,17 @@ public class App
     int numberOfPut = Integer.parseInt(System.getProperty("numberOfPut", "100"));
 
     void runTest() {
-        Configuration c = new ConfigurationBuilder()
-            .clustering().cacheMode(CacheMode.LOCAL)
-            .eviction().maxEntries(maxEntries)
-            .build();
-        EmbeddedCacheManager cm = new DefaultCacheManager(c);
+//        Configuration c = new ConfigurationBuilder()
+//            .clustering().cacheMode(CacheMode.LOCAL)
+//            .eviction().maxEntries(maxEntries)
+//            .build();
+        EmbeddedCacheManager cm = null;
+        try {
+            cm = new DefaultCacheManager("sample.xml");
+        }
+        catch (IOException ioe) {
+            throw new RuntimeException("No config file", ioe);
+        }
         Cache<String, String> cache = cm.getCache();
 
         for (int i = 1; i <= numberOfPut; i++) {
