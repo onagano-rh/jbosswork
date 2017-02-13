@@ -25,6 +25,7 @@ public class HotRodClient {
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.addServers(serverList);
         //builder.maxRetries(0);
+        builder.connectionTimeout(1500).socketTimeout(3000);
         cacheManager = new RemoteCacheManager(builder.build());
         LOG.info("Connected.");
     }
