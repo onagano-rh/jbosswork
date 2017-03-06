@@ -79,6 +79,10 @@ public class HotRodClient {
         return val;
     }
 
+    public Object containsKey(String key) {
+        return cache.containsKey(key);
+    }
+
     public int size() {
         return cache.size();
     }

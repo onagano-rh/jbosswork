@@ -57,6 +57,14 @@ public class App {
                         write(program.put(cmd[1], cmd[2]));
                         break;
 
+                    case "putNull":
+                        write(program.put(cmd[1], null));
+                        break;
+
+                    case "containsKey":
+                        write(program.containsKey(cmd[1]));
+                        break;
+
                     case "putIfAbsent":
                         write(program.putIfAbsent(cmd[1], cmd[2]));
                         break;
