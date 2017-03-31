@@ -4,6 +4,7 @@
 
 <jboss-web>
    
+    <!--
   <replication-config>
     <replication-trigger>SET_AND_NON_PRIMITIVE_GET</replication-trigger>
     <replication-granularity>SESSION</replication-granularity>
@@ -11,11 +12,11 @@
     <max-unreplicated-interval>30</max-unreplicated-interval>
     <snapshot-mode>INSTANT</snapshot-mode>
     <snapshot-interval>1000</snapshot-interval>
-    <!--
+
         https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/6.4/html/Development_Guide/chap-Clustering_in_Web_Applications.html#sect-Session_Replication
         <session-notification-policy>com.example.CustomSessionNotificationPolicy</session-notification-policy>
-    -->
   </replication-config>
+    -->
 
   <security-domain>other</security-domain>
   <disable-audit>true</disable-audit>
