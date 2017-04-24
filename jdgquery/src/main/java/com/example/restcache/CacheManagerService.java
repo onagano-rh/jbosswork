@@ -74,6 +74,7 @@ public class CacheManagerService {
                     .addProperty("lucene_version", "LUCENE_CURRENT")
                     .addProperty("default.directory_provider", "infinispan")
                     .addProperty("default.indexmanager", "org.infinispan.query.indexmanager.InfinispanIndexManager")
+                    .addProperty("hibernate.search.infinispan.configuration_resourcename", "default-hibernatesearch-infinispan.xml")
                     .addIndexedEntity(Person.class)
                 .build();
         return new DefaultCacheManager(gc, lc);
