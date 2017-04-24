@@ -6,6 +6,7 @@
             <module name="org.hibernate" slot="main" export="true" services="import" />
             <module name="org.infinispan" slot="jdg-7.0" export="true" services="import" />
             <module name="org.infinispan.query" slot="jdg-7.0" export="true" services="import" />
+            <module name="org.infinispan.query.dsl" slot="jdg-7.0" export="true" services="import" />
         </dependencies>
     </deployment>
 </jboss-deployment-structure>

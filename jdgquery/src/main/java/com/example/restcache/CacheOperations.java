@@ -1,5 +1,7 @@
 package com.example.restcache;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -8,6 +10,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.infinispan.Cache;
+import org.infinispan.query.Search;
+import org.infinispan.query.dsl.Query;
+import org.infinispan.query.dsl.QueryFactory;
 import org.jboss.logging.Logger;
 
 /**
@@ -78,5 +83,29 @@ public class CacheOperations {
             getCache().put(String.format("key%06d", i), String.format("value%08d", i));
     	}
         return "{filled}\n";
+    }
+
+    /**
+     * http://infinispan.org/tutorials/simple/query/
+     * curl "http://localhost:8080/jdgquery/rest/the-default-cache/query"
+     */
+    @GET
+    @Path("query")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String query() {
+        LOG.infof("To query");
+        Cache<String, Person> cache = getCache();
+        cache.put("person1", new Person("William", "Shakespeare"));
+        cache.put("person2", new Person("William", "Wordsworth"));
+        cache.put("person3", new Person("John", "Milton"));
+        // Obtain a query factory for the cache
+        QueryFactory queryFactory = Search.getQueryFactory(cache);
+        // Construct a query
+        Query query = queryFactory.from(Person.class).having("name").eq("William").toBuilder().build();
+        // Execute the query
+        List<Person> matches = query.list();
+        // List the results
+        matches.forEach(person -> LOG.infof("Match: %s", person));
+        return "{query}\n";
     }
 }
