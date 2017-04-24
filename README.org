@@ -33,4 +33,4 @@ A sample JDG library mode application to run as a standalone Java.
 
 * jdgquery
 
-A sample JDG 7 application to be deployed on EAP 6.
+A sample JDG 7 library mode application with EAP modules.
