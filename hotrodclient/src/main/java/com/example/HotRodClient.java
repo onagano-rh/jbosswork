@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.logging.*;
+import java.util.concurrent.TimeUnit;
 
 import org.infinispan.client.hotrod.*;
 import org.infinispan.client.hotrod.configuration.*;
@@ -12,7 +13,7 @@ public class HotRodClient {
 
     private RemoteCacheManager cacheManager;
     private RemoteCache<String, Object> cache;
-    
+
     private EventLogListener listener = new EventLogListener();
 
     public HotRodClient(String serverList, String cacheName) {
@@ -74,6 +75,10 @@ public class HotRodClient {
         return cache.withFlags(Flag.FORCE_RETURN_VALUE).putIfAbsent(key, value);
     }
 
+    public Object putWithExpiration(String key, Object value, int expiration) {
+        return cache.put(key, value, expiration, TimeUnit.SECONDS);
+    }
+
     public Object remove(String key) {
         Object val = cache.remove(key);
         return val;
@@ -103,7 +108,7 @@ public class HotRodClient {
             LOG.log(Level.FINE, "Error in clearAsync", e);
         }
     }
-    
+
     public void addListener() {
         cache.addClientListener(listener);
         LOG.info("Added " + listener);

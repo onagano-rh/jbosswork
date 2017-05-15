@@ -69,6 +69,10 @@ public class App {
                         write(program.putIfAbsent(cmd[1], cmd[2]));
                         break;
 
+                    case "putWithExpiration":
+                        write(program.putWithExpiration(cmd[1], cmd[2], Integer.parseInt(cmd[3])));
+                        break;
+
                     case "remove":
                         write(program.remove(cmd[1]));
                         break;
