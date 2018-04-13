@@ -18,5 +18,7 @@
 <body>
 <h1>HTTP Session Test Page</h1>
 <p>Counter: <%= counter %></p>
+<p>Session ID: <%= session.getId() %></p>
+<p>Cookie header: <%= request.getHeader("Cookie") %></p>
 </body>
 </html>
