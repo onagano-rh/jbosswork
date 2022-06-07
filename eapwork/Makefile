@@ -26,10 +26,10 @@ start-domain: domain
 cli:
 	$(JBOSS_HOME)/bin/jboss-cli.sh -c $(ARGS)
 
-add-user:
-	JAVA_OPTS="-Djboss.server.config.user.dir=./standalone/configuration \
-                   -Djboss.domain.config.user.dir=./domain/configuration" \
-          $(JBOSS_HOME)/bin/add-user.sh admin RedHat1!
+add-mgmt-user-to-standalone:
+	${JBOSS_HOME}/bin/add-user.sh \
+	-sc ./standalone/configuration \
+	admin RedHat1!
 
 h2:
 	java -cp $(JBOSS_HOME)/modules/system/layers/base/com/h2database/h2/main/h2*.jar org.h2.tools.Server $(ARGS)
