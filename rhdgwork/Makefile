@@ -3,8 +3,6 @@ export JAVA_HOME
 ISPN_HOME = /home/onagano/opt/rh/redhat-datagrid-8.3.1-server
 export ISPN_HOME
 
-.PHONY: svr01 svr02
-
 echo:
 	@echo JAVA_HOME is $(JAVA_HOME)
 	@echo ISPN_HOME is $(ISPN_HOME)
@@ -16,18 +14,18 @@ start-server: server
 	${ISPN_HOME}/bin/server.sh -s server \
 		-c infinispan-local.xml
 
-prepare-svr01: prepare-server
+svr01: server
 	mv server svr01
 
-prepare-svr02: prepare-server
+svr02: server
 	mv server svr02
 
-svr01:
+start-svr01: svr01
 	${ISPN_HOME}/bin/server.sh -s svr01 \
 		-c infinispan.xml \
 		| sed 's/^/[svr01] /'
 
-svr02:
+start-svr02: svr02
 	${ISPN_HOME}/bin/server.sh -s svr02 \
 		-o 100 \
 		-c infinispan.xml \
