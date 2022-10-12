@@ -1,34 +1,32 @@
 package com.example;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
 public class MyApp {
 
+    @Autowired
+    InfinispanProvider ispn;
+
     public static void main(String[] args) {
         SpringApplication.run(MyApp.class, args);
     }
 
-    @RequestMapping("/")
-    @ResponseBody
-    public Message displayMessage() {
-        return new Message();
+    @GetMapping("/{key}")
+    public String get(@PathVariable("key") String key) {
+        return ispn.get(key);
     }
 
-    static class Message {
-        private String content = "Greetings!";
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
+    @PostMapping("/{key}")
+    public void put(@PathVariable("key") String key, @RequestBody String value) {
+        ispn.put(key, value);
     }
 }
