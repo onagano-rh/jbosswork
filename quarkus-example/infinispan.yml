@@ -1,0 +1,21 @@
+apiVersion: infinispan.org/v1
+kind: Infinispan
+metadata:
+  name: infinispan
+spec:
+  replicas: 1
+  service:
+    type: DataGrid
+    container:
+      ephemeralStorage: true
+  container:
+    cpu: "1.0"
+    memory: "1Gi"
+  security:
+    endpointEncryption:
+      type: None
+    endpointAuthentication: false
+    authorization:
+      enabled: false
+  configListener:
+    enabled: false
