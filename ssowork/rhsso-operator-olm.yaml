@@ -1,0 +1,22 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: rhsso-operator-group
+spec:
+  targetNamespaces:
+  - rhssotest1
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: rhsso-operator
+spec:
+  channel: stable
+  installPlanApproval: Manual
+  name: rhsso-operator
+  source: redhat-operators
+  sourceNamespace: openshift-marketplace
+
+# Requires cluster-admin.
+# https://access.redhat.com/documentation/en-us/red_hat_single_sign-on/7.6/html/server_installation_and_configuration_guide/operator#install_by_command
+# oc patch installplan $(oc get ip -n rhssotest1 -o=jsonpath='{.items[?(@.spec.approved==false)].metadata.name}') -n rhssotest1 --type merge --patch '{"spec":{"approved":true}}'
