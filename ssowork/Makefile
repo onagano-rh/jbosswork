@@ -13,8 +13,6 @@ standalone:
 
 start-standalone: standalone
 	${JBOSS_HOME}/bin/standalone.sh \
-	  -Dkeycloak.profile=preview \
-	  -Dwildfly.statistics-enabled=true \
 	  -Djboss.server.base.dir=./standalone $(ARGS)
 
 standalone2:
@@ -22,9 +20,7 @@ standalone2:
 
 start-standalone2: standalone2
 	${JBOSS_HOME}/bin/standalone.sh \
-		-Djboss.socket.binding.port-offset=100 \
-	  -Dkeycloak.profile=preview \
-	  -Dwildfly.statistics-enabled=true \
+	  -Djboss.socket.binding.port-offset=100 \
 	  -Djboss.server.base.dir=./standalone2 $(ARGS)
 
 domain:
@@ -34,10 +30,10 @@ start-domain: domain
 	${JBOSS_HOME}/bin/domain.sh \
 	  -Djboss.domain.base.dir=./domain $(ARGS)
 
-cli:
+start-cli:
 	${JBOSS_HOME}/bin/jboss-cli.sh -c $(ARGS)
 
-cli2:
+start-cli2:
 	${JBOSS_HOME}/bin/jboss-cli.sh -c --controller=localhost:10090 $(ARGS)
 
 add-user:
@@ -45,8 +41,9 @@ add-user:
                    -Djboss.domain.config.user.dir=./domain/configuration" \
           $(JBOSS_HOME)/bin/add-user.sh admin RedHat1!
 
-h2:
-	java -cp $(JBOSS_HOME)/modules/system/layers/base/com/h2database/h2/main/h2*.jar org.h2.tools.Server $(ARGS)
+start-h2:
+	java -cp $(JBOSS_HOME)/modules/system/layers/base/com/h2database/h2/main/h2*.jar \
+	  org.h2.tools.Server -tcp -web $(ARGS)
 
 clean:
 	@rm -rf bin
@@ -54,6 +51,11 @@ clean:
 	@rm -rf domain
 	@rm -rf master
 	@rm -rf slave
+
+
+#
+# OpenShift Template
+#
 
 import-sso-tp:
 	for resource in \
