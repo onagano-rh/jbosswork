@@ -9,7 +9,7 @@
     </parent>
 
     <groupId>com.example</groupId>
-    <artifactId>springboot-example</artifactId>
+    <artifactId>springboot-infinispan</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>springboot-example</name>
     <description>Demo project for Spring Boot</description>
