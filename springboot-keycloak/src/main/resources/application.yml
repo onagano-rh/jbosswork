@@ -4,11 +4,11 @@ spring:
       client:
         registration:
           keycloak:
-            client-id: my-spring-boot
-            client-secret: A5rGhmZIUCF1lsX5RNjeUTl22IyU0boO
+            client-id: <springboot-keycloak＞
+            client-secret: <Clients > springboot-keycloak, Secret＞
             authorization-grant-type: authorization_code
             scope: openid
         provider:
           keycloak:
-            issuer-uri: http://localhost:8180/auth/realms/test-realm
+            issuer-uri: <https://keycloak-<project>.apps.*.openshiftapps.com/auth/realms/<realm>>
             user-name-attribute: preferred_username
