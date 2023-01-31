@@ -1,0 +1,16 @@
+apibackend:
+  url: http://localhost:8180
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: ui-frontend
+            client-secret: 3GPI9fWZhiFh2QOgAC24kaprDQNsXyE8
+            authorization-grant-type: authorization_code
+            scope: openid
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:28080/auth/realms/rhssotest
+            user-name-attribute: preferred_username
