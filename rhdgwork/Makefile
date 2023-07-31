@@ -1,6 +1,6 @@
-JAVA_HOME ?= /usr/lib/jvm/java-11
+JAVA_HOME ?= /usr/lib/jvm/java-17
 export JAVA_HOME
-ISPN_HOME = /home/onagano/opt/rh/redhat-datagrid-8.3.1-server
+ISPN_HOME = /home/onagano/opt/rh/redhat-datagrid-8.4.2-server
 export ISPN_HOME
 
 echo:
@@ -12,7 +12,7 @@ server:
 
 start-server: server
 	${ISPN_HOME}/bin/server.sh -s server \
-		-c infinispan-local.xml
+		-c infinispan.xml
 
 svr01: server
 	mv server svr01
