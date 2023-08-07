@@ -84,8 +84,8 @@
     <Logger name="com.arjuna" level="WARN"/>
     <Logger name="org.jboss.threads" level="WARN"/>
 
-    <!--
-    <Logger name="org.infinispan.client.hotrod.near.NearCacheService" level="TRACE"/>
+    <!-- 
+    <Logger name="org.infinispan.client.hotrod.near" level="TRACE"/>
     -->
 
     <!-- No need to warn about not being able to TLS/SSL handshake -->
