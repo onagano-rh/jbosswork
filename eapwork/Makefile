@@ -1,6 +1,6 @@
-JAVA_HOME ?= /usr/lib/jvm/java-11
+JAVA_HOME ?= /usr/lib/jvm/java-17
 export JAVA_HOME
-JBOSS_HOME ?= /home/onagano/opt/rh/jboss-eap-7.4
+JBOSS_HOME ?= /home/onagano/opt/redhat/jboss-eap-7.4
 export JBOSS_HOME
 
 echo:
