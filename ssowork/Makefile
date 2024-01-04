@@ -1,6 +1,6 @@
-JAVA_HOME ?= /usr/lib/jvm/java-11
+JAVA_HOME ?= /usr/lib/jvm/jre-11
 export JAVA_HOME
-JBOSS_HOME ?= /home/onagano/opt/rh/rh-sso-7.6
+JBOSS_HOME ?= /home/onagano/opt/redhat/rh-sso-7.6
 export JBOSS_HOME
 
 # Echo env vars

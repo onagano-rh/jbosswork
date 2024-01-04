@@ -1,6 +1,6 @@
 JAVA_HOME ?= /usr/lib/jvm/java-17
 export JAVA_HOME
-ISPN_HOME = /home/onagano/opt/rh/redhat-datagrid-8.4.2-server
+ISPN_HOME = /home/onagano/opt/redhat/redhat-datagrid-8.4.6-server
 export ISPN_HOME
 
 echo:
