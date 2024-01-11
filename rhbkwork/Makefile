@@ -38,9 +38,13 @@ start2:
 # Oracle:
 # https://github.com/oracle/docker-images/blob/main/OracleDatabase/SingleInstance/README.md#running-oracle-database-23c-free-in-a-container
 # podman run --name myoracle -p 1521:1521 -e ORACLE_PWD=password -v /opt/oracle/oradata oracle/database:23.3.0-free
+# podman exec -it myoracle sqlplus system/password@FREE
+# SQL> CREATE USER c##keycloak IDENTIFIED BY keycloak123;
+# SQL> GRANT ALL PRIVILEGES TO c##keycloak;
+# SQL> QUIT
 
 start-h2:
-	java -cp "~/.m2/repository/org/postgresql/postgresql/42.6.0/*:~/.m2/repository/com/oracle/database/jdbc/ojdbc11/23.3.0.23.09/*:${KC_HOME}/lib/lib/main/*" \
+	java -cp "${HOME}/.m2/repository/org/postgresql/postgresql/42.6.0/*:${HOME}/.m2/repository/com/oracle/database/jdbc/ojdbc11/23.2.0.0/*:${KC_HOME}/lib/lib/main/*" \
 	  org.h2.tools.Server -tcp -web $(ARGS)
 
 

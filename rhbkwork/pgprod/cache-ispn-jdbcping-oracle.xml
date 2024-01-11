@@ -25,8 +25,8 @@
         <stack name="my-tcp" extends="tcp">
             <JDBC_PING
             	connection_driver="oracle.jdbc.OracleDriver"
-            	connection_username="c##testuser"
-            	connection_password="testuser123"
+                connection_username="c##keycloak"
+                connection_password="keycloak123"
             	connection_url="jdbc:oracle:thin:@localhost:1521/FREE"
             	initialize_sql="CREATE TABLE IF NOT EXISTS JGROUPSPING (own_addr varchar(200) NOT NULL, cluster_name varchar(200) NOT NULL, ping_data BLOB, constraint PK_JGROUPSPING PRIMARY KEY (own_addr, cluster_name))"
             	insert_single_sql="INSERT INTO JGROUPSPING (own_addr, cluster_name, ping_data) values (?, ?, ?)"
