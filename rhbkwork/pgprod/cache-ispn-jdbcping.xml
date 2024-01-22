@@ -26,7 +26,7 @@
             <JDBC_PING
             	connection_driver="org.postgresql.Driver"
             	connection_username="keycloak"
-            	connection_password="password"
+                connection_password="${env.KC_DB_PASSWORD:password}"
             	connection_url="jdbc:postgresql://localhost:5432/keycloak"
             	initialize_sql="CREATE TABLE IF NOT EXISTS JGROUPSPING (own_addr varchar(200) NOT NULL, cluster_name varchar(200) NOT NULL, ping_data BYTEA, constraint PK_JGROUPSPING PRIMARY KEY (own_addr, cluster_name))"
             	insert_single_sql="INSERT INTO JGROUPSPING (own_addr, cluster_name, ping_data) values (?, ?, ?)"
