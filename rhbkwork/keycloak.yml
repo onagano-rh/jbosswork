@@ -1,0 +1,30 @@
+# Create database by:
+# oc new-app --template=postgresql-persistent \
+#   -p POSTGRESQL_VERSION=13-el8 \
+#   -p DATABASE_SERVICE_NAME=kcpostgres \
+#   -p POSTGRESQL_USER=kcusername \
+#   -p POSTGRESQL_PASSWORD=kcpassword \
+#   -p POSTGRESQL_DATABASE=kcdatabase
+
+apiVersion: k8s.keycloak.org/v2alpha1
+kind: Keycloak
+metadata:
+  name: keycloak
+spec:
+  instances: 1
+  db:
+    vendor: postgres
+    host: kcpostgres
+    usernameSecret:
+      key: database-user
+      name: kcpostgres
+    passwordSecret:
+      key: database-password
+      name: kcpostgres
+    database: kcdatabase
+  hostname:
+    hostname: keycloak-$(oc project -q).${CLUSTER_NAME}
+  additionalOptions:
+    - name: proxy
+      value: edge
+
