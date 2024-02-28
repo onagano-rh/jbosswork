@@ -1,0 +1,22 @@
+# Usage:
+#   systemctl --user enable ./keycloak.service
+#   systemctl --user start keycloak
+#   journalctl --user -fu keycloak
+#
+# Uncomment User and Group, replace WantedBy for the system level (not --user) setting.
+
+[Unit]
+Description=Keycloak Server Service
+After=network.target
+
+[Service]
+Environment="JAVA_HOME=/usr/lib/jvm/jre-17"
+Environment="JAVA_OPTS_APPEND=-Xmx1g -Xms1g"
+ExecStart=/home/onagano/opt/redhat/rhbk-22.0.7/bin/kc.sh start --proxy=edge --hostname-strict=false
+Type=simple
+#User=onagano
+#Group=onagano
+
+[Install]
+#WantedBy=multi-user.target
+WantedBy=default.target
