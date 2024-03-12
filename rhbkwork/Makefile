@@ -32,6 +32,15 @@ start2:
 	${KC_HOME}/bin/kc.sh -cf ${CONF}/keycloak.conf start --http-port=8082 $(ARGS)
 
 
+# Env vars for debug:
+# export QUARKUS_HTTP_ACCESS_LOG_ENABLED=true
+# export KC_LOG_LEVEL=info,org.keycloak:debug,org.keycloak.services.scheduled.ScheduledTaskRunner:off,org.keycloak.transaction.JtaTransactionWrapper:off,org.keycloak.models.sessions.infinispan.changes.sessions.PersisterLastSessionRefreshStore:off
+
+
+# Start behind a proxy:
+# make start2 ARGS='--proxy=edge --hostname-url=https://myserver.net --hostname-admin-url=https://myserver.net'
+
+
 # Start PostgreSQL in prior:
 # podman run -e POSTGRES_USER=keycloak -e POSTGRES_PASSWORD=password -e POSTGRES_DB=keycloak --name kcpostgres -p 5432:5432 -d docker.io/library/postgres:14
 
